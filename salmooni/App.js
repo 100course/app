@@ -2,11 +2,12 @@ import React from 'react';
 import {AppRegistry, Text, View} from 'react-native';
 import Login from './components/Login';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import reducer from './reducers';
 
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default App = () => {
   
