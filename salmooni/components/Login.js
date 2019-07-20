@@ -3,7 +3,8 @@ import { Container, Header, Content, Form, Item, Input, Button, Text, View } fro
 import {connect} from 'react-redux';
 import {login} from '../actions/auth';
 import {Card} from 'react-native-material-ui';
-
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import PersianCalendarPicker from 'react-native-persian-calendar-picker';
 
 
 const Login = ({user, login}) => {
@@ -53,6 +54,7 @@ const Login = ({user, login}) => {
           <Card>
             <Text>{user.name}</Text>
           </Card>
+            <PersianCalendarPicker/>
         </View>
       );
     }
