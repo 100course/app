@@ -32,6 +32,8 @@ target 'salmooni' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
   target 'salmooniTests' do
     inherit! :search_paths
     # Pods for testing

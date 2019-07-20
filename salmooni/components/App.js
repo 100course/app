@@ -1,12 +1,20 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Button} from 'react-native';
 
 
-const App = () => {
+const App = (props) => {
 
     return(
         <View>
-            <Text>sign in</Text>
+            <Text>Home</Text>
+            <Button
+                title="Login"
+                onPress={() => props.navigation.push('Login')}
+            />
+            <Button
+                title="Register salmooni"
+                onPress={() => props.navigation.navigate('SalmooniRegister')}
+            />
         </View>
     );
 }
