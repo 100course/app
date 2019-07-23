@@ -3,6 +3,7 @@ import {AppRegistry, Text, View} from 'react-native';
 import App from './components/App';
 import Login from './components/Login';
 import SalmooniRegister from './components/SalmooniRegister';
+import SalmooniDashboard from './components/SalmooniDashboard';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
@@ -16,7 +17,8 @@ const AppNavigator = createStackNavigator(
   {
   Home: App,
   Login: Login,
-  SalmooniRegister: SalmooniRegister
+  SalmooniRegister: SalmooniRegister,
+  SalmooniDashboard: SalmooniDashboard
   },
   {
     initialRouteName : "Home"

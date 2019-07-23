@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS} from '../actions/types';
+import {LOGIN_SUCCESS, REGISTER_SUCCESS, LOAD_USER, LOG_OUT} from '../actions/types';
 
 const initialState = {
     user: '',
@@ -14,6 +14,24 @@ export default function(state = initialState, action) {
                 user: payload,
                 loaded: true
             };
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                user : payload,
+                loaded : true
+            };
+        case LOAD_USER:
+            return {
+                ...state,
+                user: payload,
+                loaded: true
+            }
+        case LOG_OUT:
+            return {
+                ...state, 
+                user: '',
+                loaded : false
+            }
         default:
             return state;
     }

@@ -1,44 +1,50 @@
 import React, {useState, useEffect} from 'react';
 import { Container, Header, Content, Form, Item, Input, Button, Text, View } from 'native-base';
-import MapView, {Marker} from 'react-native-maps';
+import {register, loadUser} from '../actions/auth';
+import {connect} from 'react-redux';
+import {AsyncStorage} from '@react-native-community/async-storage';
 
 
 
-const SalmooniRegister = () => {
+const SalmooniRegister = ({user, register, loadUser}) => {
 
-    const [state, setState] = useState({
-       latitude : 0,
-       longitude: 0,
+  useEffect(() => {
+    //console.log("here i am");
+    let _user = '';
+    async function getUser() { 
+
+      _user = await AsyncStorage.getItem('user');
+      console.log("user loaded:");
+
+    }
+    getUser();
+    if(_user !== '')
+      loadUser(_user);
+  },[]);
+
+    const [formData, setFormData] = useState({
        mobile: '', 
        name: '' 
     });
 
-    const {latitude, longitude, mobile, name} = state;
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(positon => {
-            setState({
-                ...state, 
-                latitude: positon.coords.latitude,
-                longitude: positon.coords.longitude
-            }, error => console.log('got error in map')); 
-        })
-   },[])
+    const {mobile, name} = formData;
+
 
    const onChangeMobile = e => {
-       setState({...state, mobile:e});
+       setFormData({...formData, mobile:e});
    }
 
    const onChangeName = e => {
-       setState({...state, name: e});
+       setFormData({...formData, name:e});
    }
 
    const onSubmit = () => {
-        console.log("submit");
+        register(formData);
    };
 
     return(
-        <View>
-        {/* <Container>
+
+        <Container>
         <Header />
         <Content>
           <Form>
@@ -53,13 +59,16 @@ const SalmooniRegister = () => {
             <Text>Register</Text>
           </Button>
         </Content>
-      </Container> */}
-      <MapView>
-
-      </MapView>
-      </View>
-
+      </Container>
+   
     );
+
 }
 
-export default SalmooniRegister;
+
+const mapSateToProps = state => ({
+  user: state.auth.user
+}); 
+
+
+export default connect(mapSateToProps, {register, loadUser})(SalmooniRegister);
